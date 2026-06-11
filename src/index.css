@@ -2,21 +2,174 @@
 
 :root {
   font-family: 'Noto Sans KR', system-ui, sans-serif;
-  color: #60544d;
-  background: #fffaf4;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  color: var(--muted);
+  background: var(--page-bg);
   --ink: #2f2925;
   --muted: #8c7e75;
   --orange: #ec5a2a;
   --line: #eadfd6;
+  --page-bg: #fffaf4;
+  --surface: #fffdfb;
+  --soft: #fff0e6;
+  --soft-hover: #fff6ef;
+  --accent-text: #b04b28;
+  --accent-hover: #dc4b20;
+  --visual-start: #ffb15b;
+  --card-bg: #2f2925;
+  --category: #ffc4a7;
+  --label: #a7978d;
+  --ghost: rgba(236, 90, 42, .045);
+  --accent-shadow: rgba(236, 90, 42, .2);
+  --focus: rgba(236, 90, 42, .35);
+}
+
+:root[data-theme='mint'] {
+  --ink: #173b35;
+  --muted: #67867f;
+  --orange: #168c78;
+  --line: #d7e8e3;
+  --page-bg: #f3fbf8;
+  --surface: #fbfffd;
+  --soft: #def4ed;
+  --soft-hover: #eaf8f3;
+  --accent-text: #126c5d;
+  --accent-hover: #107966;
+  --visual-start: #68cdb6;
+  --card-bg: #183a35;
+  --category: #9ce5d4;
+  --label: #75968e;
+  --ghost: rgba(22, 140, 120, .05);
+  --accent-shadow: rgba(22, 140, 120, .2);
+  --focus: rgba(22, 140, 120, .35);
+}
+
+:root[data-theme='berry'] {
+  --ink: #422934;
+  --muted: #987583;
+  --orange: #c24470;
+  --line: #ecd9e0;
+  --page-bg: #fff7fa;
+  --surface: #fffafd;
+  --soft: #f9e5ec;
+  --soft-hover: #fceff4;
+  --accent-text: #9b3157;
+  --accent-hover: #a93660;
+  --visual-start: #ee91b0;
+  --card-bg: #402832;
+  --category: #f3afc6;
+  --label: #a98290;
+  --ghost: rgba(194, 68, 112, .05);
+  --accent-shadow: rgba(194, 68, 112, .2);
+  --focus: rgba(194, 68, 112, .35);
+}
+
+:root[data-theme='ocean'] {
+  --ink: #20394b;
+  --muted: #718a9c;
+  --orange: #287fc2;
+  --line: #d8e6ef;
+  --page-bg: #f4faff;
+  --surface: #fbfdff;
+  --soft: #e2f1fb;
+  --soft-hover: #edf7fd;
+  --accent-text: #246b9f;
+  --accent-hover: #216fa9;
+  --visual-start: #71c4e9;
+  --card-bg: #203746;
+  --category: #9edbf5;
+  --label: #8299a9;
+  --ghost: rgba(40, 127, 194, .05);
+  --accent-shadow: rgba(40, 127, 194, .2);
+  --focus: rgba(40, 127, 194, .35);
+}
+
+:root[data-theme='lavender'] {
+  --ink: #3d354d;
+  --muted: #8b819d;
+  --orange: #8066c9;
+  --line: #e4def0;
+  --page-bg: #faf8ff;
+  --surface: #fefdff;
+  --soft: #eee8fa;
+  --soft-hover: #f5f1fc;
+  --accent-text: #6850aa;
+  --accent-hover: #6e55b5;
+  --visual-start: #b9a4eb;
+  --card-bg: #393344;
+  --category: #cbbcf1;
+  --label: #978da8;
+  --ghost: rgba(128, 102, 201, .05);
+  --accent-shadow: rgba(128, 102, 201, .2);
+  --focus: rgba(128, 102, 201, .35);
+}
+
+:root[data-theme='mocha'] {
+  --ink: #42342a;
+  --muted: #927c6d;
+  --orange: #98633d;
+  --line: #e8ddd5;
+  --page-bg: #fcf8f4;
+  --surface: #fffdfb;
+  --soft: #f2e7dd;
+  --soft-hover: #f8f0e9;
+  --accent-text: #7c4e2f;
+  --accent-hover: #815131;
+  --visual-start: #c99a72;
+  --card-bg: #3e332c;
+  --category: #e1b994;
+  --label: #a08d7f;
+  --ghost: rgba(152, 99, 61, .05);
+  --accent-shadow: rgba(152, 99, 61, .2);
+  --focus: rgba(152, 99, 61, .35);
+}
+
+:root[data-theme='lemon'] {
+  --ink: #403a25;
+  --muted: #8e8665;
+  --orange: #d49b12;
+  --line: #ebe4c9;
+  --page-bg: #fffdf4;
+  --surface: #fffef9;
+  --soft: #fbf1c9;
+  --soft-hover: #fdf7df;
+  --accent-text: #9b720e;
+  --accent-hover: #b5810c;
+  --visual-start: #f2cf63;
+  --card-bg: #3c3828;
+  --category: #f7dc83;
+  --label: #9b9374;
+  --ghost: rgba(212, 155, 18, .055);
+  --accent-shadow: rgba(212, 155, 18, .22);
+  --focus: rgba(212, 155, 18, .38);
+}
+
+:root[data-theme='night'] {
+  --ink: #f3f0ff;
+  --muted: #aaa5bf;
+  --orange: #8b7cf6;
+  --line: #39364a;
+  --page-bg: #191821;
+  --surface: #24222e;
+  --soft: #302c4e;
+  --soft-hover: #2b2940;
+  --accent-text: #c4bcff;
+  --accent-hover: #7566df;
+  --visual-start: #bb7df5;
+  --card-bg: #25232f;
+  --category: #c9c1ff;
+  --label: #8e89a5;
+  --ghost: rgba(139, 124, 246, .06);
+  --accent-shadow: rgba(139, 124, 246, .25);
+  --focus: rgba(139, 124, 246, .4);
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; min-height: 100vh; min-height: 100svh; }
+body { margin: 0; min-width: 320px; min-height: 100vh; min-height: 100svh; background: var(--page-bg); transition: background .25s ease, color .25s ease; }
 button, a { -webkit-tap-highlight-color: transparent; }
-button:focus-visible, a:focus-visible { outline: 3px solid rgba(236, 90, 42, .35); outline-offset: 3px; }
+button:focus-visible, a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 
 @media (max-width: 760px) {
   body { overscroll-behavior-y: none; }

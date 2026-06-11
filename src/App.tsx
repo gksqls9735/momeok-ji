@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import { FilterDropdown } from './components/FilterDropdown'
 import { MenuCard } from './components/MenuCard'
@@ -13,6 +13,19 @@ import {
   type Mood,
 } from './data/menus'
 
+const themes = [
+  { id: 'orange', label: '오렌지', color: '#ec5a2a' },
+  { id: 'mint', label: '민트', color: '#168c78' },
+  { id: 'berry', label: '베리', color: '#c24470' },
+  { id: 'ocean', label: '오션', color: '#287fc2' },
+  { id: 'lavender', label: '라벤더', color: '#8066c9' },
+  { id: 'mocha', label: '모카', color: '#98633d' },
+  { id: 'lemon', label: '레몬', color: '#d49b12' },
+  { id: 'night', label: '나이트', color: '#8b7cf6' },
+] as const
+
+type Theme = (typeof themes)[number]['id']
+
 function App() {
   const [category, setCategory] = useState<Category>('전체')
   const [country, setCountry] = useState<Country>('전체 국가')
@@ -21,6 +34,13 @@ function App() {
   const [history, setHistory] = useState<Menu[]>([])
   const [isPicking, setIsPicking] = useState(false)
   const [historyOpen, setHistoryOpen] = useState(false)
+  const [themeOpen, setThemeOpen] = useState(false)
+  const [theme, setTheme] = useState<Theme>(() => {
+    const savedTheme = localStorage.getItem('momeok-theme')
+    return themes.some((item) => item.id === savedTheme)
+      ? savedTheme as Theme
+      : 'orange'
+  })
   const [openFilter, setOpenFilter] = useState<'category' | 'country' | 'mood' | null>(null)
   const intervalRef = useRef<number | null>(null)
 
@@ -39,6 +59,13 @@ function App() {
   )
     ? recommendation
     : filteredMenus[0]
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('momeok-theme', theme)
+    const themeColor = themes.find((item) => item.id === theme)?.color
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', themeColor ?? '#ec5a2a')
+  }, [theme])
 
   const pickMenu = () => {
     if (isPicking || filteredMenus.length === 0) return
@@ -82,6 +109,36 @@ function App() {
           <span>모먹지!</span>
         </a>
         <div className="topbar-actions">
+          <div className="theme-picker">
+            <button
+              type="button"
+              aria-label="테마 선택"
+              aria-expanded={themeOpen}
+              onClick={() => setThemeOpen((open) => !open)}
+            >
+              <span className="theme-icon" aria-hidden="true">◐</span>
+              테마
+            </button>
+            {themeOpen && (
+              <div className="theme-options">
+                <p>분위기 바꾸기</p>
+                {themes.map((item) => (
+                  <button
+                    type="button"
+                    key={item.id}
+                    className={theme === item.id ? 'active' : ''}
+                    onClick={() => {
+                      setTheme(item.id)
+                      setThemeOpen(false)
+                    }}
+                  >
+                    <span style={{ background: item.color }} />
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
           <button type="button" onClick={() => setHistoryOpen(true)}>
             <span aria-hidden="true">◷</span>
             봤던 메뉴
