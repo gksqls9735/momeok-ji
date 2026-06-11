@@ -78,7 +78,7 @@ function App() {
     <div className="app-shell">
       <header className="topbar">
         <a className="brand" href="/" aria-label="모먹지 홈">
-          <span className="brand-mark">ㅁ</span>
+          <img className="brand-mark" src="/favicon.svg" alt="" />
           <span>모먹지!</span>
         </a>
         <div className="topbar-actions">

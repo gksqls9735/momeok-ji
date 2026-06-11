@@ -2,7 +2,7 @@
 .topbar, main { width: min(1060px, calc(100% - 40px)); margin-inline: auto; }
 .topbar { height: 68px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
 .brand { display: flex; align-items: center; gap: 9px; color: var(--ink); font-weight: 900; font-size: 20px; text-decoration: none; }
-.brand-mark { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 10px; color: white; background: var(--orange); font-size: 16px; transform: rotate(-5deg); }
+.brand-mark { display: block; width: 31px; height: 31px; filter: drop-shadow(0 5px 8px rgba(236,90,42,.16)); transform: rotate(-5deg); }
 .topbar-actions { display: flex; gap: 7px; }
 .topbar-actions button { display: flex; align-items: center; gap: 6px; padding: 8px 11px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: white; font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
 .topbar-actions strong { display: grid; place-items: center; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 99px; color: white; background: var(--orange); font-size: 9px; }
@@ -89,7 +89,7 @@
   .topbar, main { width: min(100% - 24px, 560px); }
   .topbar { height: 58px; }
   .brand { gap: 7px; font-size: 17px; }
-  .brand-mark { width: 28px; height: 28px; border-radius: 9px; font-size: 14px; }
+  .brand-mark { width: 28px; height: 28px; }
   .topbar-actions button { min-height: 40px; padding: 7px 10px; font-size: 0; }
   .topbar-actions button span { font-size: 15px; }
   .topbar-actions strong { font-size: 9px; }
