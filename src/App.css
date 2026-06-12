@@ -28,9 +28,8 @@
 .theme-picker { position: relative; }
 .theme-trigger { min-width: 96px; justify-content: center; }
 .flag { display: inline-grid; flex: none; width: 24px; height: 16px; place-items: center; overflow: hidden; border: 1px solid rgba(26,30,35,.14); border-radius: 3px; background: #fff; box-shadow: 0 1px 3px rgba(20,20,20,.12); object-fit: cover; vertical-align: middle; }
-.flag-world { color: #367ca7; background: #e6f5fb; font-size: 11px; font-weight: 900; }
-.flag-usa-clean { position: relative; background: repeating-linear-gradient(to bottom, #cf5660 0 2px, #fff 2px 4px); }
-.flag-usa-clean i { position: absolute; inset: 0 auto auto 0; width: 42%; height: 52%; border-radius: 1px; background: #3e6095; }
+.flag-world { color: #5398bd; background: #e6f5fb; }
+.flag-world svg { width: 9px; height: 9px; }
 .theme-swatch { flex: none; width: 14px; height: 14px; border: 2px solid var(--surface); border-radius: 50%; box-shadow: 0 0 0 1px var(--line); }
 .theme-chevron { color: var(--orange); font-size: 12px; }
 .theme-options { position: absolute; z-index: 9; top: calc(100% + 8px); right: 0; width: 178px; max-height: min(430px, calc(100svh - 82px)); overflow-y: auto; display: grid; gap: 4px; padding: 10px; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); box-shadow: 0 18px 45px rgba(22,18,25,.15); }
@@ -54,8 +53,8 @@
 .filter-trigger { position: relative; z-index: 2; width: 100%; min-height: 47px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; align-items: center; gap: 0 6px; padding: 7px 10px; border: 0; border-radius: 11px; color: var(--muted); background: transparent; font: inherit; text-align: left; cursor: pointer; transition: .2s ease; }
 .filter-trigger:hover { background: var(--soft-hover); }
 .filter-trigger > span:first-child { grid-column: 1; color: var(--label); font-size: 8px; font-weight: 700; letter-spacing: .08em; }
-.filter-trigger strong { grid-column: 1; overflow: hidden; margin-top: 1px; color: var(--ink); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
-.country-option { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+.filter-trigger strong { grid-column: 1; display: flex; align-items: center; overflow: hidden; min-height: 16px; margin-top: 1px; color: var(--ink); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.country-option { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 16px; line-height: 1; white-space: nowrap; }
 .country-option .flag { width: 21px; height: 14px; }
 .filter-trigger > span:last-child { grid-column: 2; grid-row: 1 / 3; color: var(--orange); font-size: 14px; transition: transform .2s ease; }
 .filter-dropdown.open .filter-trigger { color: var(--orange); background: var(--soft); }
@@ -68,7 +67,7 @@
 .filter-dropdown:nth-child(3) .dropdown-options::before { right: 28px; left: auto; }
 .dropdown-options > p { margin: 0 0 9px; color: var(--ink); font-size: 10px; font-weight: 800; }
 .dropdown-options > div { display: grid; grid-template-columns: repeat(3, minmax(62px, 1fr)); gap: 5px; }
-.dropdown-options button { padding: 8px 9px; border: 1px solid transparent; border-radius: 9px; color: var(--muted); background: var(--soft-hover); font: inherit; font-size: 10px; cursor: pointer; transition: .15s ease; }
+.dropdown-options button { display: flex; align-items: center; justify-content: center; padding: 8px 9px; border: 1px solid transparent; border-radius: 9px; color: var(--muted); background: var(--soft-hover); font: inherit; font-size: 10px; cursor: pointer; transition: .15s ease; }
 .dropdown-options button:hover { color: var(--orange); background: var(--soft); }
 .dropdown-options button.active { color: white; background: var(--orange); box-shadow: 0 5px 13px var(--accent-shadow); }
 .filter-result-count { position: relative; flex: none; min-width: 74px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 16px; color: var(--accent-text); background: var(--soft); white-space: nowrap; }
