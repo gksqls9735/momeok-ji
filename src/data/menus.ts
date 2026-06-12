@@ -270,7 +270,169 @@ const menuData: MenuData[] = [
   { id: 171, name: '그린 커리', category: '아시안', moods: ['든든하게', '매콤하게'], emoji: '🍛', description: '허브 향과 코코넛 밀크가 어우러진 태국 커리' },
   { id: 172, name: '달 마크니', category: '아시안', moods: ['건강하게', '든든하게'], emoji: '🥣', description: '렌틸콩을 버터와 향신료로 진하게 끓인 인도 요리' },
   { id: 173, name: '엔칠라다', category: '양식', moods: ['든든하게', '매콤하게'], emoji: '🌯', description: '또띠아에 속재료를 채워 소스와 치즈로 구운 맛' },
-  { id: 174, name: '크루아상', category: '카페/디저트', moods: ['가볍게', '달달하게'], emoji: '🥐', description: '겹겹이 바삭하고 버터 향 가득한 프랑스 빵' }
+  { id: 174, name: '크루아상', category: '카페/디저트', moods: ['가볍게', '달달하게'], emoji: '🥐', description: '겹겹이 바삭하고 버터 향 가득한 프랑스 빵' },
+
+  // --- 취향별 선택지 확장: 한식 ---
+  { id: 175, name: '묵은지찜', category: '한식', moods: ['든든하게', '매콤하게', '비 오는 날'], emoji: '🥘', description: '푹 익은 묵은지와 부드러운 고기가 어우러진 밥도둑' },
+  { id: 176, name: '꼬막비빔밥', category: '한식', moods: ['든든하게', '매콤하게'], emoji: '🍚', description: '쫄깃한 꼬막과 향긋한 양념장을 밥에 쓱쓱' },
+  { id: 177, name: '들깨수제비', category: '한식', moods: ['건강하게', '비 오는 날', '든든하게'], emoji: '🥣', description: '고소한 들깨 국물과 쫀득한 수제비의 따뜻한 조합' },
+  { id: 178, name: '고등어구이', category: '한식', moods: ['건강하게', '든든하게'], emoji: '🐟', description: '노릇하게 구운 고등어와 따뜻한 밥 한 공기' },
+  { id: 179, name: '물회', category: '한식', moods: ['가볍게', '매콤하게', '해장'], emoji: '🐟', description: '신선한 해산물을 새콤하고 시원한 육수에 가득' },
+
+  // --- 취향별 선택지 확장: 중식 ---
+  { id: 180, name: '훠궈', category: '중식', moods: ['든든하게', '매콤하게', '스트레스'], emoji: '🍲', description: '얼얼한 홍탕과 담백한 백탕에 재료를 골라 퐁당' },
+  { id: 181, name: '경장육슬', category: '중식', moods: ['든든하게', '달달하게'], emoji: '🥩', description: '달큰한 춘장 돼지고기를 얇은 포두부에 싸서' },
+  { id: 182, name: '토마토계란볶음', category: '중식', moods: ['가볍게', '건강하게'], emoji: '🍅', description: '새콤한 토마토와 폭신한 달걀의 편안한 한 접시' },
+  { id: 183, name: '어향가지', category: '중식', moods: ['든든하게', '매콤하게'], emoji: '🍆', description: '부드러운 가지에 새콤매콤한 어향 소스를 듬뿍' },
+  { id: 184, name: '멘보샤', category: '중식', moods: ['가볍게', '스트레스'], emoji: '🍤', description: '바삭한 빵 사이를 탱글한 새우로 꽉 채운 맛' },
+
+  // --- 취향별 선택지 확장: 일식 ---
+  { id: 185, name: '장어덮밥', category: '일식', moods: ['든든하게', '달달하게'], emoji: '🍱', description: '윤기 나는 장어구이와 달큰한 소스가 올라간 덮밥' },
+  { id: 186, name: '냉라멘', category: '일식', moods: ['가볍게', '해장'], emoji: '🍜', description: '차갑고 산뜻한 육수로 시원하게 즐기는 라멘' },
+  { id: 187, name: '가라아게', category: '일식', moods: ['든든하게', '스트레스'], emoji: '🍗', description: '간장 풍미를 머금고 바삭하게 튀긴 일본식 닭튀김' },
+  { id: 188, name: '모츠나베', category: '일식', moods: ['든든하게', '비 오는 날', '해장'], emoji: '🍲', description: '고소한 곱창과 채소를 진한 국물에 보글보글' },
+  { id: 189, name: '이나리초밥', category: '일식', moods: ['가볍게', '달달하게'], emoji: '🍣', description: '달큰한 유부 속에 새콤한 밥을 알차게 채운 한입' },
+
+  // --- 취향별 선택지 확장: 양식 ---
+  { id: 190, name: '라따뚜이', category: '양식', moods: ['가볍게', '건강하게'], emoji: '🍅', description: '알록달록한 채소를 토마토와 허브로 뭉근하게' },
+  { id: 191, name: '봉골레 파스타', category: '양식', moods: ['가볍게', '든든하게'], emoji: '🍝', description: '조개의 시원한 감칠맛을 담은 깔끔한 오일 파스타' },
+  { id: 192, name: '치킨 파르미자나', category: '양식', moods: ['든든하게', '스트레스'], emoji: '🧀', description: '바삭한 치킨 위에 토마토소스와 치즈를 듬뿍' },
+  { id: 193, name: '포케', category: '양식', moods: ['가볍게', '건강하게'], emoji: '🥗', description: '신선한 생선과 채소, 곡물을 한 그릇에 산뜻하게' },
+  { id: 194, name: '굴라시', category: '양식', moods: ['든든하게', '비 오는 날', '매콤하게'], emoji: '🥘', description: '파프리카 향과 부드러운 고기가 진하게 어우러진 스튜' },
+
+  // --- 취향별 선택지 확장: 분식 ---
+  { id: 195, name: '우동볶이', category: '분식', moods: ['든든하게', '매콤하게', '스트레스'], emoji: '🍜', description: '통통한 우동면에 매콤달콤한 떡볶이 소스를 듬뿍' },
+  { id: 196, name: '물쫄면', category: '분식', moods: ['가볍게', '해장'], emoji: '🍜', description: '쫄깃한 면을 새콤하고 시원한 육수와 함께' },
+  { id: 197, name: '김치만두', category: '분식', moods: ['가볍게', '매콤하게', '비 오는 날'], emoji: '🥟', description: '잘 익은 김치로 속을 꽉 채운 매콤한 만두' },
+  { id: 198, name: '고구마튀김', category: '분식', moods: ['가볍게', '달달하게'], emoji: '🍠', description: '달콤한 고구마를 노릇하고 바삭하게 튀겨서' },
+  { id: 199, name: '계란빵', category: '분식', moods: ['가볍게', '달달하게'], emoji: '🍳', description: '폭신한 반죽과 고소한 달걀이 만난 따뜻한 간식' },
+
+  // --- 취향별 선택지 확장: 아시안 ---
+  { id: 200, name: '마살라 도사', category: '아시안', moods: ['가볍게', '건강하게', '매콤하게'], emoji: '🥞', description: '바삭한 쌀전병에 향긋한 감자 마살라를 가득' },
+  { id: 201, name: '팟카파오무쌉', category: '아시안', moods: ['든든하게', '매콤하게'], emoji: '🍚', description: '바질 향 가득한 태국식 돼지고기 볶음을 밥과 함께' },
+  { id: 202, name: '분보후에', category: '아시안', moods: ['든든하게', '해장', '매콤하게'], emoji: '🍜', description: '레몬그라스 향과 얼큰한 국물이 매력적인 베트남 국수' },
+  { id: 203, name: '사테', category: '아시안', moods: ['가볍게', '스트레스'], emoji: '🍢', description: '향신료에 재운 고기를 불향 가득하게 구운 꼬치' },
+  { id: 204, name: '하이난 치킨라이스', category: '아시안', moods: ['가볍게', '든든하게'], emoji: '🍗', description: '촉촉한 닭고기와 향긋한 밥을 소스와 함께' },
+
+  // --- 취향별 선택지 확장: 패스트푸드 ---
+  { id: 205, name: '칠리도그', category: '패스트푸드', moods: ['든든하게', '매콤하게', '스트레스'], emoji: '🌭', description: '핫도그 위에 진한 칠리와 치즈를 아낌없이' },
+  { id: 206, name: '어니언링', category: '패스트푸드', moods: ['가볍게', '스트레스'], emoji: '🧅', description: '달큰한 양파를 바삭한 튀김옷에 감싼 사이드' },
+  { id: 207, name: '피시버거', category: '패스트푸드', moods: ['가볍게', '든든하게'], emoji: '🍔', description: '바삭한 생선 패티와 산뜻한 타르타르소스의 조합' },
+  { id: 208, name: '치킨텐더', category: '패스트푸드', moods: ['가볍게', '스트레스'], emoji: '🍗', description: '부드러운 닭 안심을 바삭하게 튀겨 소스에 콕' },
+  { id: 209, name: '페퍼로니 피자', category: '패스트푸드', moods: ['든든하게', '스트레스'], emoji: '🍕', description: '짭짤한 페퍼로니와 고소한 치즈가 가득한 피자' },
+
+  // --- 취향별 선택지 확장: 야식/안주 ---
+  { id: 210, name: '무뼈닭발', category: '야식/안주', moods: ['스트레스', '매콤하게'], emoji: '🔥', description: '뼈 없이 편하게 즐기는 화끈하고 쫄깃한 닭발' },
+  { id: 211, name: '차돌숙주볶음', category: '야식/안주', moods: ['든든하게', '스트레스'], emoji: '🥩', description: '고소한 차돌박이와 아삭한 숙주를 센 불에 볶아서' },
+  { id: 212, name: '명란구이', category: '야식/안주', moods: ['가볍게', '스트레스'], emoji: '🐟', description: '짭조름한 명란을 노릇하게 구워 감칠맛 가득' },
+  { id: 213, name: '새우소금구이', category: '야식/안주', moods: ['가볍게', '든든하게'], emoji: '🍤', description: '탱글한 새우를 굵은 소금 위에 담백하게 구워서' },
+  { id: 214, name: '김치전', category: '야식/안주', moods: ['비 오는 날', '매콤하게', '든든하게'], emoji: '🥞', description: '잘 익은 김치를 넣어 가장자리까지 바삭하게' },
+
+  // --- 취향별 선택지 확장: 카페/디저트 ---
+  { id: 215, name: '바스크 치즈케이크', category: '카페/디저트', moods: ['달달하게', '스트레스'], emoji: '🍰', description: '짙게 구운 겉면과 꾸덕한 치즈 속이 매력적인 케이크' },
+  { id: 216, name: '카놀리', category: '카페/디저트', moods: ['가볍게', '달달하게'], emoji: '🥐', description: '바삭한 페이스트리 안을 달콤한 리코타 크림으로' },
+  { id: 217, name: '다쿠아즈', category: '카페/디저트', moods: ['가볍게', '달달하게'], emoji: '🍪', description: '폭신하고 쫀득한 아몬드 과자에 크림을 샌드' },
+  { id: 218, name: '호떡', category: '카페/디저트', moods: ['달달하게', '비 오는 날'], emoji: '🥞', description: '따끈한 반죽 속에서 흑설탕 시럽이 달콤하게' },
+  { id: 219, name: '과일 타르트', category: '카페/디저트', moods: ['가볍게', '달달하게'], emoji: '🥧', description: '바삭한 타르트 위에 상큼한 제철 과일을 가득' },
+
+  // --- 300가지 메뉴 확장: 한식 ---
+  { id: 220, name: '소갈비찜', category: '한식', moods: ['든든하게', '달달하게'], emoji: '🍖', description: '부드러운 갈비에 달큰한 양념이 깊게 밴 특별한 한 끼' },
+  { id: 221, name: '알탕', category: '한식', moods: ['해장', '매콤하게', '비 오는 날'], emoji: '🍲', description: '톡톡 터지는 알과 얼큰한 국물이 시원한 맛' },
+  { id: 222, name: '오리주물럭', category: '한식', moods: ['든든하게', '매콤하게'], emoji: '🥩', description: '쫄깃한 오리고기를 매콤한 양념에 볶아 푸짐하게' },
+  { id: 223, name: '떡만둣국', category: '한식', moods: ['든든하게', '비 오는 날'], emoji: '🥟', description: '쫀득한 떡과 속 찬 만두를 따뜻한 국물에 가득' },
+  { id: 224, name: '미역국', category: '한식', moods: ['가볍게', '건강하게'], emoji: '🥣', description: '부드러운 미역과 깊은 국물로 속 편안하게' },
+  { id: 225, name: '장칼국수', category: '한식', moods: ['든든하게', '매콤하게', '비 오는 날'], emoji: '🍜', description: '구수하고 얼큰한 장 국물에 쫄깃한 면발' },
+  { id: 226, name: '대패삼겹살', category: '한식', moods: ['든든하게', '스트레스'], emoji: '🥓', description: '얇고 고소한 삼겹살을 빠르게 구워 한입' },
+  { id: 227, name: '도토리묵무침', category: '한식', moods: ['가볍게', '건강하게', '매콤하게'], emoji: '🥗', description: '탱글한 도토리묵과 채소를 새콤매콤하게' },
+  { id: 228, name: '아구찜', category: '한식', moods: ['든든하게', '매콤하게', '스트레스'], emoji: '🐟', description: '쫄깃한 아귀와 아삭한 콩나물에 매운 양념 듬뿍' },
+
+  // --- 300가지 메뉴 확장: 중식 ---
+  { id: 229, name: '라조기', category: '중식', moods: ['매콤하게', '스트레스'], emoji: '🍗', description: '바삭한 닭고기에 매콤한 고추 향을 가득 입혀서' },
+  { id: 230, name: '팔보채', category: '중식', moods: ['든든하게', '건강하게'], emoji: '🦐', description: '해산물과 채소를 다채롭게 볶아낸 풍성한 한 접시' },
+  { id: 231, name: '양장피', category: '중식', moods: ['가볍게', '스트레스'], emoji: '🥗', description: '다양한 재료와 톡 쏘는 겨자소스의 산뜻한 조합' },
+  { id: 232, name: '중화냉면', category: '중식', moods: ['가볍게', '해장'], emoji: '🍜', description: '고소한 땅콩소스와 시원한 육수가 만난 여름 별미' },
+  { id: 233, name: '홍소육', category: '중식', moods: ['든든하게', '달달하게'], emoji: '🥩', description: '간장 양념에 윤기 나게 졸인 부드러운 돼지고기' },
+  { id: 234, name: '새우완탕', category: '중식', moods: ['가볍게', '비 오는 날'], emoji: '🥟', description: '탱글한 새우를 얇은 피에 감싼 따뜻한 한입' },
+  { id: 235, name: '계란볶음밥', category: '중식', moods: ['가볍게', '든든하게'], emoji: '🍚', description: '고슬한 밥과 폭신한 달걀로 완성한 담백한 볶음밥' },
+  { id: 236, name: '쯔란양고기볶음', category: '중식', moods: ['든든하게', '스트레스'], emoji: '🥩', description: '향긋한 쯔란과 쫄깃한 양고기를 센 불에 볶아서' },
+  { id: 237, name: '산라탕', category: '중식', moods: ['해장', '매콤하게', '비 오는 날'], emoji: '🥣', description: '새콤하고 얼큰한 맛이 입맛을 깨우는 중국식 수프' },
+
+  // --- 300가지 메뉴 확장: 일식 ---
+  { id: 238, name: '돈코츠라멘', category: '일식', moods: ['든든하게', '해장'], emoji: '🍜', description: '진하고 고소한 돼지뼈 육수에 차슈를 듬뿍' },
+  { id: 239, name: '마제소바', category: '일식', moods: ['든든하게', '매콤하게'], emoji: '🍜', description: '진한 양념과 다진 고기를 면에 힘껏 비벼서' },
+  { id: 240, name: '사시미', category: '일식', moods: ['가볍게', '건강하게'], emoji: '🐟', description: '신선한 생선 본연의 맛을 깔끔하게 즐기는 한 점' },
+  { id: 241, name: '에비후라이', category: '일식', moods: ['가볍게', '스트레스'], emoji: '🍤', description: '통통한 새우를 바삭한 튀김옷에 감싸서' },
+  { id: 242, name: '오야코동', category: '일식', moods: ['가볍게', '든든하게'], emoji: '🍚', description: '부드러운 닭고기와 달걀을 밥 위에 촉촉하게' },
+  { id: 243, name: '니쿠자가', category: '일식', moods: ['든든하게', '달달하게'], emoji: '🥔', description: '고기와 감자를 달큰한 간장 국물에 포근하게 조려서' },
+  { id: 244, name: '유부우동', category: '일식', moods: ['가볍게', '비 오는 날'], emoji: '🍜', description: '달큰한 유부와 따뜻한 국물이 어우러진 우동' },
+  { id: 245, name: '함박스테이크', category: '일식', moods: ['든든하게', '스트레스'], emoji: '🍖', description: '육즙 가득한 고기 패티에 진한 소스를 듬뿍' },
+  { id: 246, name: '미소라멘', category: '일식', moods: ['든든하게', '비 오는 날'], emoji: '🍜', description: '구수한 된장 풍미와 따뜻한 육수가 매력적인 라멘' },
+
+  // --- 300가지 메뉴 확장: 양식 ---
+  { id: 247, name: '트러플 크림 파스타', category: '양식', moods: ['든든하게', '스트레스'], emoji: '🍝', description: '진한 크림소스에 향긋한 트러플 풍미를 더해서' },
+  { id: 248, name: '미트볼 스파게티', category: '양식', moods: ['든든하게', '달달하게'], emoji: '🍝', description: '큼직한 미트볼과 진한 토마토소스의 익숙한 행복' },
+  { id: 249, name: '시저 샐러드', category: '양식', moods: ['가볍게', '건강하게'], emoji: '🥗', description: '아삭한 로메인과 고소한 드레싱을 가볍게' },
+  { id: 250, name: '프렌치 어니언 수프', category: '양식', moods: ['비 오는 날', '든든하게'], emoji: '🥣', description: '달큰한 양파와 녹진한 치즈가 어우러진 따뜻한 수프' },
+  { id: 251, name: '뵈프 스트로가노프', category: '양식', moods: ['든든하게', '비 오는 날'], emoji: '🥘', description: '부드러운 소고기와 버섯을 크리미하게 끓인 요리' },
+  { id: 252, name: '피쉬앤칩스', category: '양식', moods: ['든든하게', '스트레스'], emoji: '🐟', description: '바삭한 생선튀김과 감자튀김을 푸짐하게' },
+  { id: 253, name: '잠발라야', category: '양식', moods: ['든든하게', '매콤하게'], emoji: '🍚', description: '고기와 해산물, 향신료를 풍성하게 볶은 쌀요리' },
+  { id: 254, name: '버섯 리조또', category: '양식', moods: ['든든하게', '건강하게'], emoji: '🍄', description: '향긋한 버섯과 부드러운 쌀알이 어우러진 리조또' },
+  { id: 255, name: '콥 샐러드', category: '양식', moods: ['가볍게', '건강하게'], emoji: '🥗', description: '채소와 달걀, 닭고기를 알록달록 든든하게' },
+
+  // --- 300가지 메뉴 확장: 분식 ---
+  { id: 256, name: '짜장떡볶이', category: '분식', moods: ['달달하게', '든든하게'], emoji: '🍢', description: '쫄깃한 떡에 달큰하고 진한 짜장소스를 듬뿍' },
+  { id: 257, name: '국물떡볶이', category: '분식', moods: ['매콤하게', '비 오는 날', '스트레스'], emoji: '🥘', description: '매콤달콤한 국물을 떠먹는 재미까지 있는 떡볶이' },
+  { id: 258, name: '치즈김밥', category: '분식', moods: ['가볍게', '든든하게'], emoji: '🍙', description: '고소한 치즈를 속 재료와 함께 알차게 말아서' },
+  { id: 259, name: '회오리감자', category: '분식', moods: ['가볍게', '스트레스'], emoji: '🥔', description: '빙글빙글 돌려 깎은 감자를 바삭하게 튀긴 간식' },
+  { id: 260, name: '김말이튀김', category: '분식', moods: ['가볍게', '스트레스'], emoji: '🍤', description: '당면을 김에 말아 바삭하게 튀겨낸 떡볶이 단짝' },
+  { id: 261, name: '떡라면', category: '분식', moods: ['든든하게', '해장', '비 오는 날'], emoji: '🍜', description: '얼큰한 라면에 쫀득한 떡을 더해 든든하게' },
+  { id: 262, name: '비빔만두', category: '분식', moods: ['가볍게', '매콤하게'], emoji: '🥟', description: '바삭한 만두와 새콤매콤한 채소무침의 조합' },
+  { id: 263, name: '소떡소떡', category: '분식', moods: ['가볍게', '달달하게'], emoji: '🍢', description: '소시지와 떡을 번갈아 꽂아 매콤달콤하게' },
+  { id: 264, name: '컵밥', category: '분식', moods: ['가볍게', '든든하게'], emoji: '🍚', description: '밥과 다양한 토핑을 한 컵에 야무지게 담아서' },
+
+  // --- 300가지 메뉴 확장: 아시안 ---
+  { id: 265, name: '인도네시아 렌당', category: '아시안', moods: ['든든하게', '매콤하게'], emoji: '🥘', description: '코코넛과 향신료에 소고기를 오래 졸인 깊은 맛' },
+  { id: 266, name: '로띠', category: '아시안', moods: ['가볍게', '달달하게'], emoji: '🫓', description: '겉은 바삭하고 속은 쫄깃한 동남아식 납작빵' },
+  { id: 267, name: '파니르 티카', category: '아시안', moods: ['가볍게', '건강하게'], emoji: '🧀', description: '인도식 치즈를 향신료에 재워 노릇하게 구워서' },
+  { id: 268, name: '파락 파니르', category: '아시안', moods: ['건강하게', '든든하게'], emoji: '🥬', description: '부드러운 치즈와 시금치 커리의 고소한 조합' },
+  { id: 269, name: '카오소이', category: '아시안', moods: ['든든하게', '매콤하게'], emoji: '🍜', description: '코코넛 커리 국물과 바삭한 면을 함께 즐기는 태국 국수' },
+  { id: 270, name: '짜조', category: '아시안', moods: ['가볍게', '스트레스'], emoji: '🥟', description: '속 재료를 라이스페이퍼에 말아 바삭하게 튀겨서' },
+  { id: 271, name: '껌승', category: '아시안', moods: ['든든하게', '달달하게'], emoji: '🍚', description: '숯불 돼지고기와 밥을 함께 즐기는 베트남 한 접시' },
+  { id: 272, name: '뿌팟퐁커리 볶음밥', category: '아시안', moods: ['든든하게', '달달하게'], emoji: '🦀', description: '부드러운 게살 커리와 고슬한 볶음밥의 만남' },
+  { id: 273, name: '타코 라이스', category: '아시안', moods: ['가볍게', '든든하게'], emoji: '🍚', description: '매콤한 고기와 채소를 밥 위에 풍성하게' },
+
+  // --- 300가지 메뉴 확장: 패스트푸드 ---
+  { id: 274, name: '더블치즈버거', category: '패스트푸드', moods: ['든든하게', '스트레스'], emoji: '🍔', description: '두 장의 패티와 녹진한 치즈로 확실하게 든든한 맛' },
+  { id: 275, name: '불고기버거', category: '패스트푸드', moods: ['든든하게', '달달하게'], emoji: '🍔', description: '달큰한 불고기 소스가 익숙하고 편안한 버거' },
+  { id: 276, name: '치즈스틱', category: '패스트푸드', moods: ['가볍게', '스트레스'], emoji: '🧀', description: '바삭한 튀김옷 속 치즈가 길게 늘어나는 간식' },
+  { id: 277, name: '웨지감자', category: '패스트푸드', moods: ['가볍게', '스트레스'], emoji: '🥔', description: '도톰한 감자를 겉은 바삭하고 속은 포슬하게' },
+  { id: 278, name: '바비큐 치킨 피자', category: '패스트푸드', moods: ['든든하게', '달달하게'], emoji: '🍕', description: '달콤한 바비큐 치킨과 치즈가 풍성한 피자' },
+  { id: 279, name: '크리스피 치킨버거', category: '패스트푸드', moods: ['든든하게', '스트레스'], emoji: '🍔', description: '바삭한 치킨 패티와 신선한 채소를 한입에' },
+  { id: 280, name: '모차렐라 핫도그', category: '패스트푸드', moods: ['가볍게', '달달하게'], emoji: '🌭', description: '쭉 늘어나는 모차렐라 치즈를 바삭한 반죽 속에' },
+  { id: 281, name: '고구마 피자', category: '패스트푸드', moods: ['든든하게', '달달하게'], emoji: '🍕', description: '달콤한 고구마 무스와 짭짤한 치즈의 조합' },
+  { id: 282, name: '미니 슬라이더', category: '패스트푸드', moods: ['가볍게', '스트레스'], emoji: '🍔', description: '작지만 속은 알찬 한입 크기 미니 버거' },
+
+  // --- 300가지 메뉴 확장: 야식/안주 ---
+  { id: 283, name: '닭강정', category: '야식/안주', moods: ['스트레스', '달달하게'], emoji: '🍗', description: '바삭한 닭튀김에 매콤달콤한 소스를 윤기 나게' },
+  { id: 284, name: '족발', category: '야식/안주', moods: ['든든하게', '스트레스'], emoji: '🍖', description: '야들하고 쫀득한 고기를 새우젓에 콕 찍어서' },
+  { id: 285, name: '홍합탕', category: '야식/안주', moods: ['해장', '비 오는 날', '가볍게'], emoji: '🍲', description: '홍합의 감칠맛이 우러난 맑고 뜨끈한 국물' },
+  { id: 286, name: '닭껍질튀김', category: '야식/안주', moods: ['가볍게', '스트레스'], emoji: '🍗', description: '얇고 바삭하게 튀겨 고소함이 가득한 안주' },
+  { id: 287, name: '매운어묵탕', category: '야식/안주', moods: ['해장', '매콤하게', '비 오는 날'], emoji: '🍢', description: '쫄깃한 어묵을 얼큰하고 뜨거운 국물과 함께' },
+  { id: 288, name: '노가리구이', category: '야식/안주', moods: ['가볍게', '스트레스'], emoji: '🐟', description: '노릇하게 구워 고소하고 쫄깃하게 즐기는 안주' },
+  { id: 289, name: '통오징어구이', category: '야식/안주', moods: ['든든하게', '스트레스'], emoji: '🦑', description: '통통한 오징어를 불향 가득하게 구워서' },
+  { id: 290, name: '부추전', category: '야식/안주', moods: ['비 오는 날', '가볍게'], emoji: '🥞', description: '향긋한 부추를 얇고 바삭하게 부쳐낸 전' },
+  { id: 291, name: '번데기탕', category: '야식/안주', moods: ['비 오는 날', '해장'], emoji: '🥣', description: '짭짤하고 칼칼한 국물이 매력적인 추억의 안주' },
+
+  // --- 300가지 메뉴 확장: 카페/디저트 ---
+  { id: 292, name: '슈크림빵', category: '카페/디저트', moods: ['가볍게', '달달하게'], emoji: '🥐', description: '폭신한 빵 속에 부드러운 슈크림을 가득' },
+  { id: 293, name: '브라우니', category: '카페/디저트', moods: ['달달하게', '스트레스'], emoji: '🍫', description: '꾸덕하고 진한 초콜릿 풍미로 기분 좋게' },
+  { id: 294, name: '레몬 마들렌', category: '카페/디저트', moods: ['가볍게', '달달하게'], emoji: '🍋', description: '상큼한 레몬 향을 품은 촉촉한 조개 모양 과자' },
+  { id: 295, name: '몽블랑', category: '카페/디저트', moods: ['달달하게', '스트레스'], emoji: '🌰', description: '부드러운 밤 크림을 산처럼 풍성하게 올린 디저트' },
+  { id: 296, name: '아사이볼', category: '카페/디저트', moods: ['가볍게', '건강하게'], emoji: '🥣', description: '상큼한 아사이와 과일, 그래놀라로 산뜻하게' },
+  { id: 297, name: '탕후루', category: '카페/디저트', moods: ['가볍게', '달달하게'], emoji: '🍓', description: '상큼한 과일에 바삭한 설탕 코팅을 입힌 간식' },
+  { id: 298, name: '카스텔라', category: '카페/디저트', moods: ['가볍게', '달달하게'], emoji: '🍰', description: '폭신하고 촉촉한 달걀 향 가득한 케이크' },
+  { id: 299, name: '찰깨빵', category: '카페/디저트', moods: ['가볍게', '달달하게'], emoji: '🍞', description: '고소한 깨 향과 쫀득한 속살이 매력적인 빵' },
+  { id: 300, name: '밀푀유', category: '카페/디저트', moods: ['달달하게', '스트레스'], emoji: '🍰', description: '바삭한 페이스트리와 부드러운 크림을 겹겹이' }
 ];
 
 const countryByCategory: Record<Exclude<Category, '전체'>, Exclude<Country, '전체 국가'>> = {
@@ -333,6 +495,44 @@ const countryByMenuName: Partial<Record<string, Exclude<Country, '전체 국가'
   '부리또 볼': '멕시코',
   '나초': '멕시코',
   '엔칠라다': '멕시코',
+  '라따뚜이': '프랑스',
+  '봉골레 파스타': '이탈리아',
+  '치킨 파르미자나': '이탈리아',
+  '포케': '미국',
+  '굴라시': '기타',
+  '마살라 도사': '인도',
+  '팟카파오무쌉': '태국',
+  '분보후에': '베트남',
+  '사테': '기타',
+  '하이난 치킨라이스': '기타',
+  '바스크 치즈케이크': '기타',
+  '카놀리': '이탈리아',
+  '다쿠아즈': '프랑스',
+  '호떡': '한국',
+  '과일 타르트': '프랑스',
+  '프렌치 어니언 수프': '프랑스',
+  '뵈프 스트로가노프': '기타',
+  '피쉬앤칩스': '기타',
+  '잠발라야': '미국',
+  '인도네시아 렌당': '기타',
+  '로띠': '태국',
+  '파니르 티카': '인도',
+  '파락 파니르': '인도',
+  '카오소이': '태국',
+  '짜조': '베트남',
+  '껌승': '베트남',
+  '뿌팟퐁커리 볶음밥': '태국',
+  '타코 라이스': '일본',
+  '불고기버거': '한국',
+  '모차렐라 핫도그': '한국',
+  '고구마 피자': '한국',
+  '레몬 마들렌': '프랑스',
+  '몽블랑': '프랑스',
+  '아사이볼': '기타',
+  '탕후루': '중국',
+  '카스텔라': '일본',
+  '찰깨빵': '한국',
+  '밀푀유': '프랑스',
   '반쎄오': '베트남',
   '포보': '베트남',
   '쏨땀': '태국',
