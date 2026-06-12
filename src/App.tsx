@@ -105,7 +105,7 @@ function App() {
   return (
     <div className="app-shell">
       <header className="topbar">
-        <a className="brand" href="/" aria-label="모먹지 홈">
+        <a className="brand" href="./" aria-label="모먹지 홈">
           <img className="brand-mark" src={favicon} alt="" />
           <span>모먹지!</span>
         </a>
