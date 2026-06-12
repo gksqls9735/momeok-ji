@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 type FilterDropdownProps<T extends string> = {
   label: string
   options: readonly T[]
@@ -5,6 +7,7 @@ type FilterDropdownProps<T extends string> = {
   open: boolean
   onToggle: () => void
   onSelect: (option: T) => void
+  renderOption?: (option: T) => ReactNode
 }
 
 export function FilterDropdown<T extends string>({
@@ -14,6 +17,7 @@ export function FilterDropdown<T extends string>({
   open,
   onToggle,
   onSelect,
+  renderOption = (option) => option,
 }: FilterDropdownProps<T>) {
   return (
     <div className={`filter-dropdown ${open ? 'open' : ''}`}>
@@ -24,7 +28,7 @@ export function FilterDropdown<T extends string>({
         aria-expanded={open}
       >
         <span>{label}</span>
-        <strong>{selected}</strong>
+        <strong>{renderOption(selected)}</strong>
         <span aria-hidden="true">⌄</span>
       </button>
       {open && (
@@ -39,7 +43,7 @@ export function FilterDropdown<T extends string>({
                 onClick={() => onSelect(option)}
                 aria-pressed={selected === option}
               >
-                {option}
+                {renderOption(option)}
               </button>
             ))}
           </div>

@@ -23,6 +23,10 @@
   --ghost: rgba(236, 90, 42, .045);
   --accent-shadow: rgba(236, 90, 42, .2);
   --focus: rgba(236, 90, 42, .35);
+  --card-line: rgba(255,255,255,.08);
+}
+
+:root[data-theme='orange'] {
 }
 
 :root[data-theme='mint'] {

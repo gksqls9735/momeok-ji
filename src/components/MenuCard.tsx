@@ -8,6 +8,7 @@ type MenuCardProps = {
 export function MenuCard({ menu, spinning }: MenuCardProps) {
   return (
     <article className={`menu-card ${spinning ? 'spinning' : ''}`}>
+      <span className="card-country-watermark" aria-hidden="true">{menu.country}</span>
       <div className="menu-visual" aria-hidden="true">
         <span>{menu.emoji}</span>
       </div>

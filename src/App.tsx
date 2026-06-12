@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import { FilterDropdown } from './components/FilterDropdown'
+import { CountryFlag } from './components/CountryFlag'
 import { MenuCard } from './components/MenuCard'
 import {
   categories,
@@ -27,6 +28,25 @@ const themes = [
 
 type Theme = (typeof themes)[number]['id']
 
+const countryProfiles: Record<Country, {
+  landmarks: readonly string[]
+  greeting: string
+  note: string
+}> = {
+  '전체 국가': { landmarks: ['🍽️', '🌍'], greeting: '오늘도 고민 중인가요?', note: '세계의 맛있는 메뉴를 한곳에서' },
+  '한국': { landmarks: ['🏯', '🪷'], greeting: '맛있는 한 끼, 잘 먹겠습니다', note: '정갈하고 든든한 한국의 맛' },
+  '중국': { landmarks: ['🏮', '🐉'], greeting: '오늘은 대륙의 맛으로', note: '화려하고 깊은 대륙의 풍미' },
+  '일본': { landmarks: ['🌸', '🗻'], greeting: '이타다키마스, 섬세한 한 끼', note: '담백하고 섬세한 일본의 맛' },
+  '미국': { landmarks: ['🗽', '⭐'], greeting: '크고 대담하게 즐기는 오늘', note: '대담하고 든든한 아메리칸 무드' },
+  '이탈리아': { landmarks: ['🏛️', '🍋'], greeting: '부온 아페티토!', note: '햇살과 허브 향 가득한 식탁' },
+  '베트남': { landmarks: ['🛵', '🪷'], greeting: '향긋하고 산뜻한 한 그릇', note: '싱그러운 허브와 산뜻한 풍미' },
+  '태국': { landmarks: ['🐘', '🪷'], greeting: '사왓디, 오늘은 방콕의 맛', note: '달콤하고 매콤한 방콕의 밤' },
+  '인도': { landmarks: ['🕌', '🪷'], greeting: '나마스테, 향신료 가득하게', note: '향신료가 피어나는 따뜻한 식탁' },
+  '멕시코': { landmarks: ['🌵', '☀️'], greeting: '올라! 오늘은 축제처럼', note: '경쾌하고 강렬한 축제의 맛' },
+  '프랑스': { landmarks: ['🗼', '⚜️'], greeting: '봉 아페티, 여유로운 한 끼', note: '우아하고 여유로운 파리의 한 끼' },
+  '기타': { landmarks: ['🌏', '🥢'], greeting: '새로운 맛을 발견해보세요', note: '익숙하지 않아 더 즐거운 세계의 맛' },
+}
+
 function App() {
   const [category, setCategory] = useState<Category>('전체')
   const [country, setCountry] = useState<Country>('전체 국가')
@@ -44,6 +64,19 @@ function App() {
   })
   const [openFilter, setOpenFilter] = useState<'category' | 'country' | 'mood' | null>(null)
   const intervalRef = useRef<number | null>(null)
+  const selectedTheme = themes.find((item) => item.id === theme) ?? themes[0]
+  const selectedCountryProfile = countryProfiles[country]
+  const backgroundFoods = useMemo(() => {
+    const countryFoods = [...new Set(
+      menus
+        .filter((menu) => country === '전체 국가' || menu.country === country)
+        .map((menu) => menu.emoji),
+    )]
+    const fallbackFoods = ['🍜', '🍚', '🥘', '🍲', '🥟', '🍗']
+    const source = countryFoods.length > 0 ? countryFoods : fallbackFoods
+
+    return Array.from({ length: 12 }, (_, index) => source[index % source.length])
+  }, [country])
 
   const filteredMenus = useMemo(
     () =>
@@ -104,6 +137,12 @@ function App() {
 
   return (
     <div className="app-shell">
+      <div className="page-food-cloud" aria-hidden="true">
+        {backgroundFoods.map((food, index) => <span key={`${food}-${index}`}>{food}</span>)}
+      </div>
+      <div className="page-landmarks" aria-hidden="true">
+        {selectedCountryProfile.landmarks.map((landmark, index) => <span key={`${landmark}-${index}`}>{landmark}</span>)}
+      </div>
       <header className="topbar">
         <a className="brand" href="./" aria-label="모먹지 홈">
           <img className="brand-mark" src={favicon} alt="" />
@@ -112,17 +151,19 @@ function App() {
         <div className="topbar-actions">
           <div className="theme-picker">
             <button
+              className="theme-trigger"
               type="button"
-              aria-label="테마 선택"
+              aria-label="색상 테마 선택"
               aria-expanded={themeOpen}
               onClick={() => setThemeOpen((open) => !open)}
             >
-              <span className="theme-icon" aria-hidden="true">◐</span>
-              테마
+              <span className="theme-swatch" style={{ background: selectedTheme.color }} />
+              <span>{selectedTheme.label}</span>
+              <span className="theme-chevron" aria-hidden="true">⌄</span>
             </button>
             {themeOpen && (
               <div className="theme-options">
-                <p>분위기 바꾸기</p>
+                <p>색상 테마 선택</p>
                 {themes.map((item) => (
                   <button
                     type="button"
@@ -133,8 +174,9 @@ function App() {
                       setThemeOpen(false)
                     }}
                   >
-                    <span style={{ background: item.color }} />
-                    {item.label}
+                    <span className="theme-swatch" style={{ background: item.color }} />
+                    <span>{item.label}</span>
+                    {theme === item.id && <span className="theme-check" aria-hidden="true">✓</span>}
                   </button>
                 ))}
               </div>
@@ -150,11 +192,15 @@ function App() {
 
       <main>
         <section className="hero">
-          <p className="eyebrow">오늘도 고민 중인가요?</p>
+          <div className="country-stamp" aria-hidden="true">
+            <CountryFlag country={country} />
+          </div>
+          <p className="eyebrow">{selectedCountryProfile.greeting}</p>
           <h1>
             그래서 오늘, <em>뭐 먹지?</em>
           </h1>
           <p className="hero-copy">조건을 정하고 버튼을 누르면 맛있는 답을 골라드려요.</p>
+          <p className="theme-note">{selectedCountryProfile.note}</p>
         </section>
 
         <section className="picker" aria-label="메뉴 추천">
@@ -175,6 +221,12 @@ function App() {
                 label="나라"
                 options={countries}
                 selected={country}
+                renderOption={(option) => (
+                  <span className="country-option">
+                    <CountryFlag country={option} />
+                    {option}
+                  </span>
+                )}
                 open={openFilter === 'country'}
                 onToggle={() => setOpenFilter(openFilter === 'country' ? null : 'country')}
                 onSelect={(option) => {
