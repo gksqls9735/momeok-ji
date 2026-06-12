@@ -12,6 +12,7 @@ import {
   type Menu,
   type Mood,
 } from './data/menus'
+import favicon from '/favicon.svg'
 
 const themes = [
   { id: 'orange', label: '오렌지', color: '#ec5a2a' },
@@ -105,7 +106,7 @@ function App() {
     <div className="app-shell">
       <header className="topbar">
         <a className="brand" href="/" aria-label="모먹지 홈">
-          <img className="brand-mark" src="/favicon.svg" alt="" />
+          <img className="brand-mark" src={favicon} alt="" />
           <span>모먹지!</span>
         </a>
         <div className="topbar-actions">
