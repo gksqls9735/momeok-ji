@@ -1,5 +1,15 @@
 # React + TypeScript + Vite
 
+## Kakao Map
+
+로컬 실행 시 `.env.local`에 카카오맵 JavaScript 키를 설정합니다.
+
+```env
+VITE_KAKAO_JAVASCRIPT_KEY=your_kakao_javascript_key
+```
+
+GitHub Pages 배포에는 저장소 시크릿 `KAKAO_JAVASCRIPT_KEY`를 설정하고, 카카오 개발자 콘솔의 Web 플랫폼에 배포 도메인을 등록해야 합니다.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

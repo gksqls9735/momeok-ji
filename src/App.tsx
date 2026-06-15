@@ -3,6 +3,7 @@ import './App.css'
 import { FilterDropdown } from './components/FilterDropdown'
 import { CountryFlag } from './components/CountryFlag'
 import { MenuCard } from './components/MenuCard'
+import { RestaurantMapModal } from './components/RestaurantMapModal'
 import {
   categories,
   countries,
@@ -55,6 +56,7 @@ function App() {
   const [history, setHistory] = useState<Menu[]>([])
   const [isPicking, setIsPicking] = useState(false)
   const [historyOpen, setHistoryOpen] = useState(false)
+  const [mapMenu, setMapMenu] = useState<Menu | null>(null)
   const [themeOpen, setThemeOpen] = useState(false)
   const [theme, setTheme] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem('momeok-theme')
@@ -133,6 +135,7 @@ function App() {
     resetFilters()
     setRecommendation(menu)
     setHistoryOpen(false)
+    setMapMenu(menu)
   }
 
   return (
@@ -324,6 +327,10 @@ function App() {
           )}
         </div>
       </aside>
+
+      {mapMenu && (
+        <RestaurantMapModal menu={mapMenu} onClose={() => setMapMenu(null)} />
+      )}
     </div>
   )
 }
