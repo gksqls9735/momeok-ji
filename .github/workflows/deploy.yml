@@ -32,6 +32,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check Kakao Map key
+        env:
+          VITE_KAKAO_JAVASCRIPT_KEY: ${{ secrets.KAKAO_JAVASCRIPT_KEY }}
+        run: |
+          if [ -z "$VITE_KAKAO_JAVASCRIPT_KEY" ]; then
+            echo "KAKAO_JAVASCRIPT_KEY repository secret is missing."
+            exit 1
+          fi
+
       - name: Build
         run: npm run build
         env:
