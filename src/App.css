@@ -47,13 +47,6 @@
 .country-stamp { position: absolute; top: 18px; left: calc(50% + min(38vw, 330px)); width: 64px; height: 48px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: 0 10px 25px var(--accent-shadow); transform: rotate(8deg); }
 .country-stamp .flag { width: 42px; height: 28px; border-radius: 4px; }
 .picker { width: min(690px, 100%); margin: 0 auto; padding-bottom: 24px; }
-.location-filter { display: grid; grid-template-columns: auto minmax(150px, 1fr); align-items: center; gap: 6px 10px; margin-bottom: 8px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: 0 8px 25px rgba(30,25,35,.04); }
-.location-filter label { display: flex; align-items: center; gap: 5px; color: var(--ink); font-size: 10px; font-weight: 800; white-space: nowrap; }
-.location-filter label span { color: var(--orange); font-size: 15px; }
-.location-filter select { width: 100%; padding: 8px 28px 8px 10px; border: 1px solid var(--line); border-radius: 9px; color: var(--ink); background: var(--soft-hover); font: inherit; font-size: 10px; font-weight: 700; cursor: pointer; }
-.location-filter select:disabled { cursor: wait; opacity: .7; }
-.location-filter p { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 9px; line-height: 1.5; }
-.location-filter p.searching { color: var(--orange); }
 .filter-summary { position: relative; z-index: 4; display: flex; align-items: stretch; gap: 8px; margin-bottom: 12px; }
 .dropdown-row { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 4px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: 0 8px 25px rgba(30,25,35,.06); }
 .filter-dropdown { position: relative; min-width: 0; }
@@ -148,8 +141,6 @@
   .theme-note { margin-top: 7px; font-size: 8px; }
   .hero h1 { margin: 0; font-size: clamp(32px, 10vw, 44px); }
   .picker { padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
-  .location-filter { grid-template-columns: auto 1fr; padding: 8px 10px; border-radius: 12px; }
-  .location-filter label, .location-filter select { font-size: 9px; }
   .filter-summary { display: grid; grid-template-columns: 1fr 58px; gap: 6px; }
   .dropdown-row { min-width: 0; padding: 3px; border-radius: 13px; }
   .filter-result-count { min-width: 0; min-height: 100%; flex-direction: column; gap: 1px; border-radius: 13px; }
