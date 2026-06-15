@@ -13,6 +13,7 @@ import {
   type Menu,
   type Mood,
 } from './data/menus'
+import { findAvailableMenuIds } from './services/kakaoPlaces'
 import favicon from '/favicon.svg'
 
 const themes = [
@@ -27,6 +28,17 @@ const themes = [
 ] as const
 
 type Theme = (typeof themes)[number]['id']
+type Radius = 'all' | 500 | 1000 | 1500 | 2000 | 3000 | 5000
+
+const radiusOptions: readonly { value: Radius; label: string }[] = [
+  { value: 'all', label: '전체 음식' },
+  { value: 500, label: '내 주변 500m' },
+  { value: 1000, label: '내 주변 1km' },
+  { value: 1500, label: '내 주변 1.5km' },
+  { value: 2000, label: '내 주변 2km' },
+  { value: 3000, label: '내 주변 3km' },
+  { value: 5000, label: '내 주변 5km' },
+]
 
 const countryProfiles: Record<Country, {
   landmarks: readonly string[]
@@ -54,6 +66,11 @@ function App() {
   const [recommendation, setRecommendation] = useState<Menu>(menus[0])
   const [history, setHistory] = useState<Menu[]>([])
   const [isPicking, setIsPicking] = useState(false)
+  const [radius, setRadius] = useState<Radius>('all')
+  const [availableMenuIds, setAvailableMenuIds] = useState<Set<number> | null>(null)
+  const [locationStatus, setLocationStatus] = useState('')
+  const [locationSearchProgress, setLocationSearchProgress] = useState(0)
+  const [isLocationSearching, setIsLocationSearching] = useState(false)
   const [historyOpen, setHistoryOpen] = useState(false)
   const [themeOpen, setThemeOpen] = useState(false)
   const [theme, setTheme] = useState<Theme>(() => {
@@ -64,6 +81,7 @@ function App() {
   })
   const [openFilter, setOpenFilter] = useState<'category' | 'country' | 'mood' | null>(null)
   const intervalRef = useRef<number | null>(null)
+  const locationRequestRef = useRef(0)
   const selectedTheme = themes.find((item) => item.id === theme) ?? themes[0]
   const selectedCountryProfile = countryProfiles[country]
   const backgroundFoods = useMemo(() => {
@@ -84,9 +102,10 @@ function App() {
         (menu) =>
           (category === '전체' || menu.category === category) &&
           (country === '전체 국가' || menu.country === country) &&
-          (mood === '아무거나' || menu.moods.includes(mood)),
+          (mood === '아무거나' || menu.moods.includes(mood)) &&
+          (radius === 'all' || availableMenuIds?.has(menu.id)),
       ),
-    [category, country, mood],
+    [availableMenuIds, category, country, mood, radius],
   )
   const displayedRecommendation = filteredMenus.some(
     (menu) => menu.id === recommendation.id,
@@ -100,6 +119,71 @@ function App() {
     const themeColor = themes.find((item) => item.id === theme)?.color
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', themeColor ?? '#ec5a2a')
   }, [theme])
+
+  const searchNearbyMenus = (nextRadius: Exclude<Radius, 'all'>) => {
+    const requestId = locationRequestRef.current + 1
+    locationRequestRef.current = requestId
+
+    if (!navigator.geolocation) {
+      setRadius('all')
+      setLocationStatus('이 브라우저에서는 현재 위치를 사용할 수 없어요.')
+      return
+    }
+
+    setIsLocationSearching(true)
+    setAvailableMenuIds(null)
+    setLocationSearchProgress(0)
+    setLocationStatus('현재 위치를 확인하고 있어요.')
+
+    navigator.geolocation.getCurrentPosition(
+      async ({ coords }) => {
+        try {
+          setLocationStatus('근처 음식점을 확인하고 있어요.')
+          const ids = await findAvailableMenuIds(
+            menus,
+            { latitude: coords.latitude, longitude: coords.longitude },
+            nextRadius,
+            (progress) => {
+              if (locationRequestRef.current === requestId) setLocationSearchProgress(progress)
+            },
+          )
+          if (locationRequestRef.current !== requestId) return
+          setAvailableMenuIds(ids)
+          setLocationStatus(
+            ids.size > 0
+              ? `반경 안에서 주문할 수 있는 메뉴 ${ids.size}개를 찾았어요.`
+              : '선택한 반경에서 검색되는 음식점을 찾지 못했어요.',
+          )
+        } catch (error) {
+          if (locationRequestRef.current !== requestId) return
+          setRadius('all')
+          setLocationStatus(error instanceof Error ? error.message : '근처 음식점을 확인하지 못했어요.')
+        } finally {
+          if (locationRequestRef.current === requestId) setIsLocationSearching(false)
+        }
+      },
+      () => {
+        if (locationRequestRef.current !== requestId) return
+        setRadius('all')
+        setIsLocationSearching(false)
+        setLocationStatus('현재 위치 권한이 필요해요. 브라우저 설정에서 위치 접근을 허용해주세요.')
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 },
+    )
+  }
+
+  const changeRadius = (value: string) => {
+    const nextRadius = value === 'all' ? 'all' : Number(value) as Exclude<Radius, 'all'>
+    setRadius(nextRadius)
+    if (nextRadius === 'all') {
+      locationRequestRef.current += 1
+      setAvailableMenuIds(null)
+      setLocationStatus('')
+      setIsLocationSearching(false)
+      return
+    }
+    searchNearbyMenus(nextRadius)
+  }
 
   const pickMenu = () => {
     if (isPicking || filteredMenus.length === 0) return
@@ -159,7 +243,7 @@ function App() {
             >
               <span className="theme-swatch" style={{ background: selectedTheme.color }} />
               <span>{selectedTheme.label}</span>
-              <span className="theme-chevron" aria-hidden="true">⌄</span>
+              <span className="theme-chevron" aria-hidden="true" />
             </button>
             {themeOpen && (
               <div className="theme-options">
@@ -204,6 +288,29 @@ function App() {
         </section>
 
         <section className="picker" aria-label="메뉴 추천">
+          <div className="location-filter">
+            <label htmlFor="radius-filter">
+              <span aria-hidden="true">⌖</span>
+              음식점 거리
+            </label>
+            <select
+              id="radius-filter"
+              value={radius}
+              onChange={(event) => changeRadius(event.target.value)}
+              disabled={isLocationSearching}
+            >
+              {radiusOptions.map((option) => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+              ))}
+            </select>
+            {locationStatus && (
+              <p className={isLocationSearching ? 'searching' : ''}>
+                {isLocationSearching
+                  ? `${locationStatus} (${locationSearchProgress}/${menus.length})`
+                  : locationStatus}
+              </p>
+            )}
+          </div>
           <div className="filter-summary">
             <div className="dropdown-row">
               <FilterDropdown
@@ -270,9 +377,9 @@ function App() {
               className="pick-button"
               type="button"
               onClick={pickMenu}
-              disabled={isPicking || filteredMenus.length === 0}
+              disabled={isPicking || isLocationSearching || filteredMenus.length === 0}
             >
-              <span>{isPicking ? '맛있는 메뉴 찾는 중...' : '오늘 메뉴 골라줘!'}</span>
+              <span>{isLocationSearching ? '근처 음식점 확인 중...' : isPicking ? '맛있는 메뉴 찾는 중...' : '오늘 메뉴 골라줘!'}</span>
               <span aria-hidden="true">→</span>
             </button>
             <p className="hint">마음에 안 들면 몇 번이고 다시 눌러도 괜찮아요.</p>
