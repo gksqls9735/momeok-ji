@@ -31,14 +31,14 @@ const themes = [
 type Theme = (typeof themes)[number]['id']
 type Radius = 'all' | 500 | 1000 | 1500 | 2000 | 3000 | 5000
 
-const radiusOptions: readonly { value: Radius; label: string }[] = [
-  { value: 'all', label: '전체 음식' },
-  { value: 500, label: '내 주변 500m' },
-  { value: 1000, label: '내 주변 1km' },
-  { value: 1500, label: '내 주변 1.5km' },
-  { value: 2000, label: '내 주변 2km' },
-  { value: 3000, label: '내 주변 3km' },
-  { value: 5000, label: '내 주변 5km' },
+const radiusOptions: readonly { value: Radius; label: string; shortLabel: string }[] = [
+  { value: 'all', label: '전체 음식', shortLabel: '전체' },
+  { value: 500, label: '내 주변 500m', shortLabel: '500m' },
+  { value: 1000, label: '내 주변 1km', shortLabel: '1km' },
+  { value: 1500, label: '내 주변 1.5km', shortLabel: '1.5km' },
+  { value: 2000, label: '내 주변 2km', shortLabel: '2km' },
+  { value: 3000, label: '내 주변 3km', shortLabel: '3km' },
+  { value: 5000, label: '내 주변 5km', shortLabel: '5km' },
 ]
 
 const countryProfiles: Record<Country, {
@@ -233,7 +233,8 @@ function App() {
               disabled={isLocationSearching}
               onClick={() => setRadiusOpen((open) => !open)}
             >
-              <span>{selectedRadius.label}</span>
+              <span className="radius-label radius-label-full">{selectedRadius.label}</span>
+              <span className="radius-label radius-label-short">{selectedRadius.shortLabel}</span>
               <span className="radius-chevron" aria-hidden="true" />
             </button>
             {radiusOpen && (
@@ -368,7 +369,7 @@ function App() {
               )}
             </div>
           </div>
-          <div className="result-area">
+          <div className={`result-area ${isLocationSearching ? 'searching' : ''}`}>
             {isLocationSearching ? (
               <article className="menu-card loading-result">
                 <div>
@@ -389,7 +390,7 @@ function App() {
               </article>
             )}
             <button
-              className="pick-button"
+              className={`pick-button ${isLocationSearching ? 'searching' : ''}`}
               type="button"
               onClick={pickMenu}
               disabled={isPicking || isLocationSearching || filteredMenus.length === 0}
@@ -397,7 +398,9 @@ function App() {
               <span>{isLocationSearching ? '근처 음식점 확인 중...' : isPicking ? '맛있는 메뉴 찾는 중...' : '오늘 메뉴 골라줘!'}</span>
               <span aria-hidden="true">→</span>
             </button>
-            <p className="hint">마음에 안 들면 몇 번이고 다시 눌러도 괜찮아요.</p>
+            {!isLocationSearching && (
+              <p className="hint">마음에 안 들면 몇 번이고 다시 눌러도 괜찮아요.</p>
+            )}
           </div>
         </section>
       </main>
