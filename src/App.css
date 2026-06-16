@@ -94,8 +94,8 @@
 .theme-note { display: inline-flex; align-items: center; margin: 10px 0 0; padding: 5px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--accent-text); background: var(--surface); font-size: 9px; font-weight: 700; }
 .country-stamp { position: absolute; top: 18px; left: calc(50% + min(38vw, 330px)); width: 64px; height: 48px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: 0 10px 25px var(--accent-shadow); transform: rotate(8deg); }
 .country-stamp .flag { width: 42px; height: 28px; border-radius: 4px; }
-.picker { width: min(690px, 100%); margin: 0 auto; padding-bottom: 24px; }
-.location-status { min-height: 15px; margin: -4px 0 6px; color: var(--muted); font-size: 9px; line-height: 1.5; text-align: center; }
+.picker { position: relative; width: min(690px, 100%); margin: 0 auto; padding-bottom: 24px; }
+.location-status { position: absolute; right: 0; left: 0; top: -18px; margin: 0; color: var(--muted); font-size: 9px; line-height: 1.5; text-align: center; pointer-events: none; }
 .location-status.searching { color: var(--orange); }
 .filter-summary { position: relative; z-index: 4; display: flex; align-items: stretch; gap: 8px; margin-bottom: 12px; }
 .dropdown-row { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 4px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: 0 8px 25px rgba(30,25,35,.06); }
@@ -227,7 +227,7 @@
   .theme-note { margin-top: 7px; font-size: 8px; }
   .hero h1 { margin: 0; font-size: clamp(32px, 10vw, 44px); }
   .picker { padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
-  .location-status { margin: -2px 0 5px; font-size: 8px; }
+  .location-status { top: -16px; font-size: 8px; }
   .filter-summary { display: grid; grid-template-columns: 1fr 58px; gap: 6px; }
   .dropdown-row { min-width: 0; padding: 3px; border-radius: 13px; }
   .filter-result-count { min-width: 0; min-height: 100%; flex-direction: column; gap: 1px; border-radius: 13px; }
