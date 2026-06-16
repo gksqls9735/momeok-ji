@@ -36,6 +36,42 @@
 .radius-options button { width: 100%; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 8px 9px; border: 0; border-radius: 9px; color: var(--ink); background: transparent; font: inherit; font-size: 10px; font-weight: 700; text-align: left; cursor: pointer; }
 .radius-options button:hover, .radius-options button.active { color: var(--orange); background: var(--soft); }
 .radius-options button.active { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--orange) 18%, transparent); }
+.theme-options,
+.dropdown-options,
+.panel-content,
+.restaurant-list {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--orange) 52%, white) color-mix(in srgb, var(--soft) 72%, transparent);
+}
+.theme-options::-webkit-scrollbar,
+.dropdown-options::-webkit-scrollbar,
+.panel-content::-webkit-scrollbar,
+.restaurant-list::-webkit-scrollbar {
+  width: 10px;
+}
+.theme-options::-webkit-scrollbar-track,
+.dropdown-options::-webkit-scrollbar-track,
+.panel-content::-webkit-scrollbar-track,
+.restaurant-list::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--soft) 72%, transparent);
+}
+.theme-options::-webkit-scrollbar-thumb,
+.dropdown-options::-webkit-scrollbar-thumb,
+.panel-content::-webkit-scrollbar-thumb,
+.restaurant-list::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--orange) 78%, white), color-mix(in srgb, var(--accent-hover) 72%, white));
+  background-clip: padding-box;
+}
+.theme-options::-webkit-scrollbar-thumb:hover,
+.dropdown-options::-webkit-scrollbar-thumb:hover,
+.panel-content::-webkit-scrollbar-thumb:hover,
+.restaurant-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--orange), var(--accent-hover));
+  background-clip: padding-box;
+}
 .theme-picker { position: relative; }
 .theme-trigger { min-width: 96px; justify-content: center; }
 .flag { display: inline-grid; flex: none; width: 24px; height: 16px; place-items: center; overflow: hidden; border: 1px solid rgba(26,30,35,.14); border-radius: 3px; background: #fff; box-shadow: 0 1px 3px rgba(20,20,20,.12); object-fit: cover; vertical-align: middle; }
@@ -220,9 +256,9 @@
   .map-modal { max-height: calc(100svh - 16px); border-radius: 18px; }
   .map-modal-header { padding: 14px 14px 12px; }
   .map-modal-header h2 { font-size: 18px; }
-  .map-modal-content { display: flex; flex-direction: column; overflow-y: auto; }
+  .map-modal-content { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
   .restaurant-map { flex: none; min-height: 44svh; }
-  .restaurant-list { flex: none; overflow: visible; border-top: 1px solid var(--line); border-left: 0; }
+  .restaurant-list { flex: 1; min-height: 0; overflow-y: auto; border-top: 1px solid var(--line); border-left: 0; }
 }
 
 @media (max-width: 380px) {
