@@ -21,6 +21,7 @@ type PlacesSearchOptions = {
   size: number
   category_group_code: string
   sort: string
+  radius?: number
 }
 
 type KakaoPlaces = {
@@ -72,6 +73,7 @@ declare global {
 }
 
 let sdkPromise: Promise<KakaoSdk> | null = null
+const availabilityCache = new Map<string, Set<number>>()
 
 export function loadKakaoMap() {
   if (window.kakao?.maps.services) return Promise.resolve(window.kakao)
@@ -144,4 +146,66 @@ export async function searchNearbyRestaurants(menuName: string, coordinates: Coo
       },
     )
   })
+}
+
+function availabilityCacheKey(coordinates: Coordinates, radius: number) {
+  return [
+    coordinates.latitude.toFixed(3),
+    coordinates.longitude.toFixed(3),
+    radius,
+  ].join(':')
+}
+
+export async function findAvailableMenuIds(
+  menus: readonly { id: number; name: string }[],
+  coordinates: Coordinates,
+  radius: number,
+  onProgress: (completed: number) => void,
+) {
+  const key = availabilityCacheKey(coordinates, radius)
+  const cached = availabilityCache.get(key)
+  if (cached) {
+    onProgress(menus.length)
+    return cached
+  }
+
+  const kakao = await loadKakaoMap()
+  const places = new kakao.maps.services.Places()
+  const availableIds = new Set<number>()
+  const concurrency = 8
+  let nextIndex = 0
+  let completed = 0
+
+  const worker = async () => {
+    while (nextIndex < menus.length) {
+      const menu = menus[nextIndex]
+      nextIndex += 1
+
+      await new Promise<void>((resolve) => {
+        places.keywordSearch(
+          menu.name.replace('/', ' '),
+          (result, status) => {
+            if (status === kakao.maps.services.Status.OK && result.length > 0) {
+              availableIds.add(menu.id)
+            }
+            completed += 1
+            onProgress(completed)
+            resolve()
+          },
+          {
+            x: coordinates.longitude,
+            y: coordinates.latitude,
+            radius,
+            size: 1,
+            category_group_code: 'FD6',
+            sort: kakao.maps.services.SortBy.DISTANCE,
+          },
+        )
+      })
+    }
+  }
+
+  await Promise.all(Array.from({ length: concurrency }, worker))
+  availabilityCache.set(key, availableIds)
+  return availableIds
 }
