@@ -133,8 +133,8 @@
 .menu-card::after { content: ''; position: absolute; width: 270px; height: 270px; right: -90px; bottom: -150px; border: 45px solid rgba(255,255,255,.04); border-radius: 50%; }
 .card-country-watermark { position: absolute; z-index: 0; right: 22px; top: 18px; color: rgba(255,255,255,.045); font-size: 76px; font-weight: 900; letter-spacing: -.08em; pointer-events: none; }
 .menu-card.spinning .menu-visual span, .menu-card.spinning .menu-details { animation: flicker .16s ease infinite alternate; }
-.empty-result { display: grid; place-items: center; padding: 35px; text-align: center; }
-.empty-result > div { position: relative; z-index: 1; }
+.empty-result { min-height: clamp(220px, 30vh, 260px); display: grid; grid-template-columns: 1fr; place-items: center; padding: 24px 35px; text-align: center; }
+.empty-result > div { position: relative; z-index: 1; display: grid; justify-items: center; align-content: center; max-width: 360px; }
 .empty-result span { font-size: 48px; }
 .empty-result h2 { margin: 12px 0 6px; font-size: 23px; letter-spacing: -.05em; }
 .empty-result p { margin: 0; color: rgba(255,255,255,.62); font-size: 12px; }
@@ -244,6 +244,7 @@
   .dropdown-options > div { grid-template-columns: repeat(3, 1fr); gap: 7px; }
   .dropdown-options button { min-height: 42px; padding: 9px 6px; font-size: 11px; }
   .menu-card { min-height: 0; grid-template-columns: 1fr; border-radius: 20px; }
+  .empty-result { min-height: 210px; padding: 22px 24px; }
   .loading-result { min-height: 210px; padding: 22px 24px; }
   .menu-visual { height: clamp(125px, 20svh, 160px); margin: 10px 10px 0; border-radius: 15px; }
   .menu-visual span { font-size: clamp(62px, 20vw, 82px); }
@@ -294,5 +295,6 @@
   .menu-details h2 { font-size: 27px; }
   .menu-tags { display: none; }
   .pick-button { min-height: 46px; padding-block: 11px; }
+  .empty-result { min-height: 190px; }
   .loading-result { min-height: 190px; }
 }
