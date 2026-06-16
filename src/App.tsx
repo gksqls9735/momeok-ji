@@ -28,6 +28,9 @@ const themes = [
   { id: 'night', label: '나이트', color: '#8b7cf6' },
 ] as const
 
+const filterStorageKey = 'momeok-filters'
+const historyStorageKey = 'momeok-history'
+
 type Theme = (typeof themes)[number]['id']
 type Radius = 'all' | 500 | 1000 | 1500 | 2000 | 3000 | 5000
 
@@ -60,14 +63,50 @@ const countryProfiles: Record<Country, {
   '기타': { landmarks: ['🌏', '🥢'], greeting: '새로운 맛을 발견해보세요', note: '익숙하지 않아 더 즐거운 세계의 맛' },
 }
 
+function readStoredFilters() {
+  try {
+    const raw = localStorage.getItem(filterStorageKey)
+    if (!raw) return null
+    const parsed = JSON.parse(raw) as {
+      category?: Category
+      country?: Country
+      mood?: Mood
+      radius?: Radius
+    }
+    return {
+      category: categories.includes(parsed.category ?? '전체') ? parsed.category ?? '전체' : '전체',
+      country: countries.includes(parsed.country ?? '전체 국가') ? parsed.country ?? '전체 국가' : '전체 국가',
+      mood: moods.includes(parsed.mood ?? '아무거나') ? parsed.mood ?? '아무거나' : '아무거나',
+      radius: radiusOptions.some((option) => option.value === parsed.radius) ? parsed.radius ?? 'all' : 'all',
+    }
+  } catch {
+    return null
+  }
+}
+
+function readStoredHistory() {
+  try {
+    const raw = localStorage.getItem(historyStorageKey)
+    if (!raw) return []
+    const parsed = JSON.parse(raw) as number[]
+    return parsed
+      .map((id) => menus.find((menu) => menu.id === id))
+      .filter((menu): menu is Menu => Boolean(menu))
+  } catch {
+    return []
+  }
+}
+
 function App() {
-  const [category, setCategory] = useState<Category>('전체')
-  const [country, setCountry] = useState<Country>('전체 국가')
-  const [mood, setMood] = useState<Mood>('아무거나')
+  const storedFilters = readStoredFilters()
+  const initialStoredRadius = storedFilters?.radius ?? 'all'
+  const [category, setCategory] = useState<Category>(storedFilters?.category ?? '전체')
+  const [country, setCountry] = useState<Country>(storedFilters?.country ?? '전체 국가')
+  const [mood, setMood] = useState<Mood>(storedFilters?.mood ?? '아무거나')
   const [recommendation, setRecommendation] = useState<Menu>(menus[0])
-  const [history, setHistory] = useState<Menu[]>([])
+  const [history, setHistory] = useState<Menu[]>(() => readStoredHistory())
   const [isPicking, setIsPicking] = useState(false)
-  const [radius, setRadius] = useState<Radius>('all')
+  const [radius, setRadius] = useState<Radius>(storedFilters?.radius ?? 'all')
   const [availableMenuIds, setAvailableMenuIds] = useState<Set<number> | null>(null)
   const [locationStatus, setLocationStatus] = useState('')
   const [locationSearchProgress, setLocationSearchProgress] = useState(0)
@@ -122,6 +161,22 @@ function App() {
     const themeColor = themes.find((item) => item.id === theme)?.color
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', themeColor ?? '#ec5a2a')
   }, [theme])
+
+  useEffect(() => {
+    localStorage.setItem(filterStorageKey, JSON.stringify({
+      category,
+      country,
+      mood,
+      radius,
+    }))
+  }, [category, country, mood, radius])
+
+  useEffect(() => {
+    localStorage.setItem(
+      historyStorageKey,
+      JSON.stringify(history.map((menu) => menu.id)),
+    )
+  }, [history])
 
   const pickMenu = () => {
     if (isPicking || isLocationSearching || filteredMenus.length === 0) return
@@ -203,11 +258,24 @@ function App() {
 
   const selectedRadius = radiusOptions.find((option) => option.value === radius) ?? radiusOptions[0]
 
+  useEffect(() => {
+    if (initialStoredRadius === 'all') return
+    const timer = window.setTimeout(() => {
+      searchNearbyMenus(initialStoredRadius)
+    }, 0)
+    return () => window.clearTimeout(timer)
+  }, [initialStoredRadius])
+
   const viewHistoryMenu = (menu: Menu) => {
     resetFilters()
     setRecommendation(menu)
     setHistoryOpen(false)
     setMapMenu(menu)
+  }
+
+  const clearHistory = () => {
+    setHistory([])
+    localStorage.removeItem(historyStorageKey)
   }
 
   return (
@@ -429,7 +497,12 @@ function App() {
             <p className="eyebrow">최근 추천</p>
             <h2>봤던 메뉴</h2>
           </div>
-          <button type="button" aria-label="최근 메뉴 닫기" onClick={() => setHistoryOpen(false)}>×</button>
+          <div className="panel-actions">
+            {history.length > 0 && (
+              <button type="button" className="ghost-button" onClick={clearHistory}>초기화</button>
+            )}
+            <button type="button" aria-label="최근 메뉴 닫기" onClick={() => setHistoryOpen(false)}>×</button>
+          </div>
         </div>
         <div className="panel-content history-list">
           {history.length > 0 ? history.map((menu) => (
